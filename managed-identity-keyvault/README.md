@@ -17,6 +17,12 @@ Instead of storing a rotated credential somewhere else (a config file, an enviro
 
 **Result:** the application retrieves its secret at runtime with zero credentials configured in code or application settings.
 
+## Proof of concept
+
+![Key Vault reference resolved via Managed Identity](./screenshots/resolved.png)
+
+*The App Service authenticated to Key Vault and resolved the secret using its System-assigned Managed Identity — confirmed via the Key Vault Reference Details panel, with no credential stored anywhere in configuration.*
+
 ## What this demonstrates
 
 - **Least privilege** — the Managed Identity was granted only the `Key Vault Secrets User` role (read-only), not broader Key Vault management access.
@@ -28,14 +34,36 @@ Instead of storing a rotated credential somewhere else (a config file, an enviro
 1. **Manually, in the Azure portal** — to understand exactly what each setting does (see `portal-steps.md`)
 2. **As Terraform** — reflecting how this would actually be deployed under a no-ClickOps policy (see `main.tf`)
 
-## What tripped me up
+## Troubleshooting encountered
 
-- **F1 (free tier) quota errors** on first deployment in one region — resolved by switching region; Azure trial subscriptions often have zero App Service quota in specific regions.
-- **RBAC lockout on my own account** — after granting the Managed Identity access to the vault, my own user account had no permissions on it and couldn't view secrets, until I explicitly granted myself a role too.
-- **Key Vault reference syntax** — the App Service setting needs the full `@Microsoft.KeyVault(SecretUri=...)` wrapper with the exact secret version path, not just the vault's base URL.
+<details>
+<summary>F1 (free tier) quota error on first deployment</summary>
+
+![Quota error](./screenshots/quota-error.png)
+
+Resolved by switching region — Azure trial subscriptions often have zero App Service quota for certain tiers in specific regions.
+</details>
+
+<details>
+<summary>RBAC access error on my own account</summary>
+
+![RBAC error](./screenshots/rbac-error.png)
+
+After granting the App Service's Managed Identity access to the vault, my own user account had no permissions on it at all — "operation not allowed by RBAC." Had to separately grant myself a role (`Key Vault Secrets Officer`), since access isn't implied just by having created the resource.
+</details>
+
+<details>
+<summary>Key Vault reference syntax — before resolution</summary>
+
+![Key Vault reference unresolved](./screenshots/keyvault-reference-unresolved.png)
+
+The reference needs the full `@Microsoft.KeyVault(SecretUri=...)` wrapper with the exact secret version path, not just the vault's base URL.
+</details>
 
 ## Technologies
 
 Azure App Service · Azure Key Vault · Entra ID Managed Identity · Azure RBAC · Terraform
+
+
 
 
