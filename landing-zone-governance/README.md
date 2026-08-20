@@ -26,7 +26,7 @@ These sound similar but are distinct settings, and that distinction turned out t
 
 **5. The fix.** A second, more precisely targeted policy — "Storage accounts should disable public network access" — was assigned alongside the first. Once live, it immediately flagged the two existing storage accounts as non-compliant:
 
-![Existing storage accounts correctly flagged as non-compliant](./screenshots/noncompliant-existing-resource.png)
+![Existing storage accounts correctly flagged as non-compliant](./screenshots/non-compliant-existing-resource.png)
 
 ...and then successfully **blocked** a third test storage account from being created at all:
 
