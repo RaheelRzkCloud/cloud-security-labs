@@ -24,7 +24,13 @@ These sound similar but are distinct settings, and that distinction turned out t
 
 **4. The real gotcha: the first policy targeted the wrong specific setting.** After the propagation window passed, the subscription's compliance page showed **100% compliant**, despite two storage accounts genuinely having public network access enabled. The policy selected — "Configure your Storage account public access to be disallowed" — was correctly doing its job, but it evaluates **anonymous blob access**, not the broader **public network access** setting. Picking a policy based on a plausible-sounding name, without checking precisely which setting it evaluates, left a real gap.
 
-**5. The fix.** A second, more precisely targeted policy — "Storage accounts should disable public network access" — was assigned alongside the first. Once live, it immediately flagged the two existing storage accounts as non-compliant (Detect), and then successfully **blocked** a third test storage account from being created at all:
+**5. The fix.** A second, more precisely targeted policy — "Storage accounts should disable public network access" — was assigned alongside the first. Once live, it immediately flagged the two existing storage accounts as non-compliant:
+
+![Existing storage accounts correctly flagged as non-compliant](./screenshots/noncompliant-existing-resources.png)
+
+...and then successfully **blocked** a third test storage account from being created at all:
+
+![Storage account creation blocked by policy](./screenshots/policy-blocked-deployment.png)
 
 ```
 Resource 'labstorageaccountrio458' was disallowed by policy.
