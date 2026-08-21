@@ -77,6 +77,12 @@ resource "azurerm_subnet_network_security_group_association" "database" {
   network_security_group_id = azurerm_network_security_group.database.id
 }
 
+variable "sql_admin_login" {
+  description = "Entra ID login for the SQL Server administrator - passed in at apply time, never hardcoded, to avoid exposing a real identity in a public repo."
+  type        = string
+  sensitive   = true
+}
+
 resource "azurerm_mssql_server" "lab" {
   name                         = "lab-sql-server-rio"
   resource_group_name         = azurerm_resource_group.lab.name
@@ -87,7 +93,7 @@ resource "azurerm_mssql_server" "lab" {
   # consistent with the Managed Identity principle from the first lab in
   # this repo.
   azuread_administrator {
-    login_username = "raheelrazzak91@gmail.com"
+    login_username = var.sql_admin_login
     object_id       = data.azurerm_client_config.current.object_id
   }
 
@@ -113,6 +119,7 @@ resource "azurerm_private_endpoint" "sql" {
     is_manual_connection             = false
   }
 }
+
 
 
 
