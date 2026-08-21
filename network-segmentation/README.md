@@ -39,6 +39,8 @@ The single explicit rule (priority 100) allows inbound SQL traffic only from `10
 
 *Attempting to connect to the database via the Azure portal's Query editor — representing a connection from outside the trusted web-subnet path — was blocked outright: "Public access is turned off for this server."*
 
+**6. A hardcoded identity slipped through, even after learning the pattern.** The SQL Server's Entra administrator was initially set using a literal email address in the Terraform file. This is the same category of exposure as the tenant ID and subscription ID earlier in this same file — an identity, publicly visible in a repo, specifically labelled as holding admin rights over the database — yet it wasn't caught until a final review, well after the tenant/subscription ID pattern had already been applied correctly elsewhere in the same file. Fixed by moving it to a `sensitive` Terraform variable, supplied at apply time rather than committed to the repo. A useful, honest reminder that recognising a security pattern once doesn't guarantee it's applied consistently everywhere it should be — it's worth a deliberate final pass, not just applying the lesson the first few times it comes up.
+
 ## What this demonstrates
 
 - **Defence in layers, not a single control** — subnet isolation, NSG rules, disabled public access, and a Private Endpoint all had to work together; any one alone would have left a gap
@@ -54,6 +56,8 @@ The single explicit rule (priority 100) allows inbound SQL traffic only from `10
 ## Technologies
 
 Azure Virtual Network · Subnets · Network Security Groups · Azure SQL · Private Endpoints · Microsoft Entra ID authentication · Terraform
+
+
 
 
 
