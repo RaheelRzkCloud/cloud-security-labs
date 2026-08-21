@@ -24,7 +24,7 @@ resource "azurerm_resource_group" "lab" {
 }
 
 resource "azurerm_virtual_network" "lab" {
-  name                = "lab-vnet"
+  name                = "lab-vnetrio"
   resource_group_name = azurerm_resource_group.lab.name
   location            = azurerm_resource_group.lab.location
   address_space       = ["10.0.0.0/16"]
@@ -113,4 +113,6 @@ resource "azurerm_private_endpoint" "sql" {
     is_manual_connection             = false
   }
 }
+
+
 
