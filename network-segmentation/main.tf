@@ -123,3 +123,4 @@ resource "azurerm_private_endpoint" "sql" {
 
 
 
+
