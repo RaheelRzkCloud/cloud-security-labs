@@ -23,6 +23,7 @@ Each lab follows the same structure:
 | [`conditional-access-mfa/`](./conditional-access-mfa) | CISO wants risk-based MFA, not a blanket policy, for a UK-based org with no international travel | Entra ID Conditional Access, risk-based access control, report-only rollout, break-glass accounts |
 | [`landing-zone-governance/`](./landing-zone-governance) | CTO wants to stop ad-hoc, ungoverned resource creation from recurring as the company scales | Azure Management Groups, Azure Policy inheritance, Detect vs. Protect enforcement |
 | [`network-segmentation/`](./network-segmentation) | New customer-facing web app needs a database isolated from the office network and the public internet | VNets, Subnets, Network Security Groups, Azure SQL, Private Endpoints, deny-by-default segmentation |
+| [`hub-spoke-firewall/`](./hub-spoke-firewall) | Multiple product teams scaling up need consistent outbound network security without each building and reviewing their own | Hub-and-spoke architecture, VNet Peering, Azure Firewall, User-Defined Routes, centralised shared services |
 
 *(More labs added as the learning programme progresses.)*
 
