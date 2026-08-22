@@ -20,6 +20,10 @@ A **hub-and-spoke** architecture: a central **hub VNet** owned by a platform tea
 
 **5. VM availability constraint.** An attempt to deploy a small test VM into the workload subnet — to prove the routing end-to-end with real traffic — hit a wall: no VM size was available for this trial subscription in the region used, across both Arm64 and x64 architectures. Rather than continue spending time and firewall cost chasing an increasingly unlikely fix, the decision was made to verify the design through configuration review instead of live traffic. Knowing when to stop and document rather than keep spending is itself a reasonable engineering judgement call, not a shortfall in the work.
 
+Every resource described above was genuinely deployed, confirmed here immediately before teardown:
+
+![All hub-and-spoke resources confirmed deployed in the resource group](./screenshots/deployed-resources.png)
+
 ## What this demonstrates
 
 - **Centralising shared controls while preserving team-level isolation** — the hub owns the firewall and review burden once; spokes stay isolated from each other but consume the shared service via peering
@@ -29,6 +33,8 @@ A **hub-and-spoke** architecture: a central **hub VNet** owned by a platform tea
 - **Deliberately stopping a test path when it stops being a good use of time and cost**, and documenting that decision honestly rather than pretending an end-to-end live test happened
 
 ## Architecture
+
+![Hub-and-spoke architecture with centralised outbound firewall](./screenshots/architecture-diagram.png)
 
 The spoke's workload subnet is forced, via UDR, through the hub's firewall subnet before reaching the internet. The firewall's separate management subnet and public IP keep its own administrative traffic apart from customer traffic entirely.
 
