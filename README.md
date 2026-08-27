@@ -24,7 +24,7 @@ Each lab follows the same structure:
 | [`landing-zone-governance/`](./landing-zone-governance) | CTO wants to stop ad-hoc, ungoverned resource creation from recurring as the company scales | Azure Management Groups, Azure Policy inheritance, Detect vs. Protect enforcement |
 | [`network-segmentation/`](./network-segmentation) | New customer-facing web app needs a database isolated from the office network and the public internet | VNets, Subnets, Network Security Groups, Azure SQL, Private Endpoints, deny-by-default segmentation |
 | [`hub-spoke-firewall/`](./hub-spoke-firewall) | Multiple product teams scaling up need consistent outbound network security without each building and reviewing their own | Hub-and-spoke architecture, VNet Peering, Azure Firewall, User-Defined Routes, centralised shared services |
-| [`resource-graph-tag-governance/`](./resource-graph-tag-governance) | Governance report finds resources with missing or invalid mandatory tags, with no self-serve way to detect this | Azure Resource Graph, KQL, tag presence vs. tag validity, Deny vs. Audit *(Policy/Terraform: in progress)* |
+| [`resource-graph-tag-governance/`](./resource-graph-tag-governance) | Governance report finds resources with missing or invalid mandatory tags, with no self-serve way to detect or prevent this | Azure Resource Graph, KQL, Azure Policy (Audit and Deny), tag presence vs. tag validity *(Terraform: in progress)* |
 
 *(More labs added as the learning programme progresses.)*
 
