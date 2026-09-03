@@ -25,14 +25,16 @@ Each lab follows the same structure:
 | [`network-segmentation/`](./network-segmentation) | New customer-facing web app needs a database isolated from the office network and the public internet | VNets, Subnets, Network Security Groups, Azure SQL, Private Endpoints, deny-by-default segmentation |
 | [`hub-spoke-firewall/`](./hub-spoke-firewall) | Multiple product teams scaling up need consistent outbound network security without each building and reviewing their own | Hub-and-spoke architecture, VNet Peering, Azure Firewall, User-Defined Routes, centralised shared services |
 | [`resource-graph-tag-governance/`](./resource-graph-tag-governance) | Governance report finds resources with missing or invalid mandatory tags, with no self-serve way to detect or prevent this | Azure Resource Graph, KQL, Azure Policy (Audit and Deny), tag presence vs. tag validity *(Terraform: in progress)* |
+| [`detection-posture-monitoring/`](./detection-posture-monitoring) | No way to be told automatically when a control gap occurs, detection depends entirely on someone happening to look | Log Analytics Workspace, Microsoft Sentinel, Diagnostic Settings (resource and subscription level), Azure Policy layering (resource group / subscription / management group), control-plane vs. data-plane logging, KQL *(Terraform: not yet built; Sentinel Analytics Rule execution issue unresolved, documented as a genuine open platform anomaly)* |
 
 *(More labs added as the learning programme progresses.)*
 
 ## Tools & technologies
 
-- Azure (App Service, Key Vault, Entra ID, RBAC, Azure Policy, Azure Resource Graph)
+- Azure (App Service, Key Vault, Entra ID, RBAC, Azure Policy, Azure Resource Graph, Log Analytics, Microsoft Sentinel)
 - Kusto Query Language (KQL)
 - Terraform (organisational IaC standard — no ClickOps in production)
+- Azure CLI / ARM templates (where portal tooling had gaps)
 - Azure Portal (for initial hands-on understanding before translating to code)
 
 ## Background
